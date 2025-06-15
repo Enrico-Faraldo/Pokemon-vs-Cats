@@ -16,3 +16,25 @@
     height: 100vh;
     width: 100vw;
 }
+
+.jogador {
+    height: 50vh;
+    width: 30vw;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    background-image: var(--jogador-imagem);
+    left: 10vw;
+    top: 40vh;
+}
+
+.oponente {
+    height: 40vh;
+    width: 25vw;
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    background-image: var(--oponente-imagem);
+    right: 13vw;
+    top: 10vh;
+}

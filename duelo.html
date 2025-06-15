@@ -14,86 +14,78 @@
     <div class="duelo"></div>
 </body>
 <script>
-    /*window.onload = function () {
+    window.onload = function () {
         const urlParams = new URLSearchParams(window.location.search)
         const personagem = urlParams.get('personagem')
+        const time = urlParams.get('time')
 
-        if (personagem == 'gato') {
-            listarGatos()
+        if (time == 'gato') {
+            pegarGatoJogador(personagem)
+            pegarPokemonOponente()
         }
         else {
-            listarPokemon()
+            pegarPokemonJogador(personagem)
+            pegarGatoOponente()
         }
-    }*/
-    /*lista de gatos: 
-    Siamês: BB18hZT2z
-    Gato-Leão: PoZIVJ124
-    Gatânico: aqi
-    Super-Gato-Bros: bqu
-    Mini-Cat: a2q*/
-
-    /*Lista de Pokémon:
-    Pikachu, Greninja, Charizard, Gyarados, Rayquaza*/
-
-    async function listarGatos() {
-        let gatoSiamesPromise = await fetch("https://api.thecatapi.com/v1/images/BB18hZT2z")
-        let gatoLeaoPromise = await fetch("https://api.thecatapi.com/v1/images/PoZIVJ124")
-        let gatanicoPromise = await fetch("https://api.thecatapi.com/v1/images/aqi")
-        let superGatoBrosPromise = await fetch("https://api.thecatapi.com/v1/images/bqu")
-        let miniCatPromise = await fetch("https://api.thecatapi.com/v1/images/a2q")
-
-        let gatoSiamesJSON = await gatoSiamesPromise.json()
-        let gatoLeaoJSON = await gatoLeaoPromise.json()
-        let gatanicoJSON = await gatanicoPromise.json()
-        let superGatoBrosJSON = await superGatoBrosPromise.json()
-        let miniCatJSON = await miniCatPromise.json()
-
-        let gatoSiamesImagem = gatoSiamesJSON.url
-        let gatoLeaoImagem = gatoLeaoJSON.url
-        let gatanicoImagem = gatanicoJSON.url
-        let superGatoBrosImagem = superGatoBrosJSON.url
-        let miniCatImagem = miniCatJSON.url
-
-        let gatos = [gatoSiamesImagem, gatoLeaoImagem, gatanicoImagem, superGatoBrosImagem, miniCatImagem]
-
-        let div = document.getElementById('div_personagem')
-        //div.style.setProperty('--gato-imagem', `url(${gatoImagem})`)
-
-        let frase = ''
-        for (let i = 0; i < gatos.length; i++) {
-            frase += `<div class="personagem" style="background-image: url(${gatos[i]});"></div>`
-        }
-        div.innerHTML = frase
     }
-    async function listarPokemon() {
-        let pikachuPromise = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
-        let greninjaPromise = await fetch("https://pokeapi.co/api/v2/pokemon/greninja")
-        let charizardPromise = await fetch("https://pokeapi.co/api/v2/pokemon/charizard")
-        let gyaradosPromise = await fetch("https://pokeapi.co/api/v2/pokemon/gyarados")
-        let rayquazaPromise = await fetch("https://pokeapi.co/api/v2/pokemon/rayquaza")
+    /*const urlParams = new URLSearchParams(window.location.search)
+    const personagem = urlParams.get('personagem')
+    const time = urlParams.get('time')*/
 
-        let pikachuJSON = await pikachuPromise.json()
-        let greninjaJSON = await greninjaPromise.json()
-        let charizardJSON = await charizardPromise.json()
-        let gyaradosJSON = await gyaradosPromise.json()
-        let rayquazaJSON = await rayquazaPromise.json()
+    async function pegarGatoJogador(personagem) {
+        let gatoJogadorPromise = await fetch(`https://api.thecatapi.com/v1/images/${personagem}`)
 
-        let pikachuImagem = pikachuJSON.sprites.front_default
-        let greninjaImagem = greninjaJSON.sprites.front_default
-        let charizardImagem = charizardJSON.sprites.front_default
-        let gyaradosImagem = gyaradosJSON.sprites.front_default
-        let rayquazaImagem = rayquazaJSON.sprites.front_default
+        let gatoJogadorJSON = await gatoJogadorPromise.json()
 
-        let pokemon = [pikachuImagem, greninjaImagem, charizardImagem, gyaradosImagem, rayquazaImagem]
-
-        let div = document.getElementById('div_personagem')
+        let div = document.getElementById('div_jogador')
         //div.style.setProperty('--gato-imagem', `url(${gatoImagem})`)
 
-        let frase = ''
-        for (let i = 0; i < pokemon.length; i++) {
-            frase += `<div class="personagem" style="background-image: url(${pokemon[i]});"></div>`
-        }
-        div.innerHTML = frase
+        div.style.setProperty('--jogador-imagem', `url(${gatoJogadorJSON.url})`)
+
+
+    }
+    async function pegarPokemonJogador(personagem) {
+        let pokemonJogadorPromise = await fetch(`https://pokeapi.co/api/v2/pokemon/${personagem}`)
+
+        let pokemonJogadorJSON = await pokemonJogadorPromise.json()
+
+        let div = document.getElementById('div_jogador')
+        //div.style.setProperty('--pokemon-imagem', `url(${pokemonImagem})`)
+
+        div.style.setProperty('--jogador-imagem', `url(${pokemonJogadorJSON.sprites.front_default})`)
+    }
+
+    async function pegarGatoOponente() {
+        const numeroSorteado = Math.floor(Math.random() * 5)
+        
+        let gatos = ['BB18hZT2z', 'PoZIVJ124', 'aqi', 'bqu', 'a2q']
+        let gatoOponenteNome = gatos[numeroSorteado]
+
+        let gatoOponentePromise = await fetch(`https://api.thecatapi.com/v1/images/${gatoOponenteNome}`)
+
+        let gatoOponenteJSON = await gatoOponentePromise.json()
+
+        let div = document.getElementById('div_oponente')
+        //div.style.setProperty('--gato-imagem', `url(${gatoImagem})`)
+
+        div.style.setProperty('--oponente-imagem', `url(${gatoOponenteJSON.url})`)
+
+    }
+
+    async function pegarPokemonOponente() {
+        const numeroSorteado = Math.floor(Math.random() * 5)
+        
+        let pokemon = ['pikachu', 'greninja', 'charizard', 'gyarados', 'rayquaza']
+        let pokemonOponenteNome = pokemon[numeroSorteado]
+
+        let pokemonOponentePromise = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonOponenteNome}`)
+
+        let pokemonOponenteJSON = await pokemonOponentePromise.json()
+
+        let div = document.getElementById('div_oponente')
+        //div.style.setProperty('--pokemon-imagem', `url(${pokemonImagem})`)
+
+        div.style.setProperty('--oponente-imagem', `url(${pokemonOponenteJSON.sprites.front_default})`)
     }
 </script>
 

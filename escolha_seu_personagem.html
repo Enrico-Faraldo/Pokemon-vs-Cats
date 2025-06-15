@@ -71,7 +71,7 @@
 
         let frase = ''
         for (let i = 0; i < gatos.length; i++) {
-            frase += `<div class="personagem" style="background-image: url(${gatos[i].gato.url});" onclick="redirecionarParaDuelo('${gatos[i].nome}')"></div>`
+            frase += `<div class="personagem" style="background-image: url(${gatos[i].gato.url});" onclick="redirecionarParaDuelo('${gatos[i].gato.id}')"></div>`
         }
         div.innerHTML = frase
     }
