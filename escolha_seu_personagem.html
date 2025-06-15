@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon vs Cats</title>
+    <link rel="stylesheet" href="./escolha_personagem.css">
+</head>
+
+<body>
+    <h1>Escolha seu personagem!</h1>
+    <div id="div_personagem" class="personagens"></div>
+</body>
+<script>
+    window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search)
+        const personagem = urlParams.get('personagem')
+
+        if (personagem == 'gato') {
+            listarGatos()
+        }
+        else {
+            listarPokemon()
+        }
+    }
+    /*lista de gatos: 
+    Siamês: BB18hZT2z
+    Gato-Leão: PoZIVJ124
+    Gatânico: aqi
+    Super-Gato-Bros: bqu
+    Mini-Cat: a2q*/
+
+    /*Lista de Pokémon:
+    Pikachu, Greninja, Charizard, Gyarados, Rayquaza*/
+
+    async function listarGatos() {
+        let gatoSiamesPromise = await fetch("https://api.thecatapi.com/v1/images/BB18hZT2z")
+        let gatoLeaoPromise = await fetch("https://api.thecatapi.com/v1/images/PoZIVJ124")
+        let gatanicoPromise = await fetch("https://api.thecatapi.com/v1/images/aqi")
+        let superGatoBrosPromise = await fetch("https://api.thecatapi.com/v1/images/bqu")
+        let miniCatPromise = await fetch("https://api.thecatapi.com/v1/images/a2q")
+
+        let gatoSiamesJSON = await gatoSiamesPromise.json()
+        let gatoLeaoJSON = await gatoLeaoPromise.json()
+        let gatanicoJSON = await gatanicoPromise.json()
+        let superGatoBrosJSON = await superGatoBrosPromise.json()
+        let miniCatJSON = await miniCatPromise.json()
+
+        let gatoSiamesImagem = gatoSiamesJSON.url
+        let gatoLeaoImagem = gatoLeaoJSON.url
+        let gatanicoImagem = gatanicoJSON.url
+        let superGatoBrosImagem = superGatoBrosJSON.url
+        let miniCatImagem = miniCatJSON.url
+
+        let gatos = [gatoSiamesImagem, gatoLeaoImagem, gatanicoImagem, superGatoBrosImagem, miniCatImagem]
+
+        let div = document.getElementById('div_personagem')
+        //div.style.setProperty('--gato-imagem', `url(${gatoImagem})`)
+
+        let frase = ''
+        for (let i = 0; i < gatos.length; i++) {
+            frase += `<div class="personagem" style="background-image: url(${gatos[i]});"></div>`
+        }
+        div.innerHTML = frase
+    }
+    async function listarPokemon() {
+        let pikachuPromise = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
+        let greninjaPromise = await fetch("https://pokeapi.co/api/v2/pokemon/greninja")
+        let charizardPromise = await fetch("https://pokeapi.co/api/v2/pokemon/charizard")
+        let gyaradosPromise = await fetch("https://pokeapi.co/api/v2/pokemon/gyarados")
+        let rayquazaPromise = await fetch("https://pokeapi.co/api/v2/pokemon/rayquaza")
+
+        let pikachuJSON = await pikachuPromise.json()
+        let greninjaJSON = await greninjaPromise.json()
+        let charizardJSON = await charizardPromise.json()
+        let gyaradosJSON = await gyaradosPromise.json()
+        let rayquazaJSON = await rayquazaPromise.json()
+
+        let pikachuImagem = pikachuJSON.sprites.front_default
+        let greninjaImagem = greninjaJSON.sprites.front_default
+        let charizardImagem = charizardJSON.sprites.front_default
+        let gyaradosImagem = gyaradosJSON.sprites.front_default
+        let rayquazaImagem = rayquazaJSON.sprites.front_default
+
+        let pokemon = [pikachuImagem, greninjaImagem, charizardImagem, gyaradosImagem, rayquazaImagem]
+
+        let div = document.getElementById('div_personagem')
+        //div.style.setProperty('--gato-imagem', `url(${gatoImagem})`)
+
+        let frase = ''
+        for (let i = 0; i < pokemon.length; i++) {
+            frase += `<div class="personagem" style="background-image: url(${pokemon[i]});"></div>`
+        }
+        div.innerHTML = frase
+    }
+</script>
+
+</html>

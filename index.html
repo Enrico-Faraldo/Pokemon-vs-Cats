@@ -10,8 +10,8 @@
 
 <body>
     <h1>Escolha seu time!</h1>
-    <div id="div_pokemon" class="pokemon"></div>
-    <div id="div_gato" class="gato"></div>
+    <div id="div_pokemon" class="pokemon" onclick="redirecionarParaEscolhaDePersonagem('pokemon')"></div>
+    <div id="div_gato" class="gato" onclick="redirecionarParaEscolhaDePersonagem('gato')"></div>
 
 </body>
 <script>
@@ -44,6 +44,9 @@
 
         let div = document.getElementById('div_pokemon')
         div.style.setProperty('--pokemon-imagem', `url(${pokemonImagem})`)
+    }
+    function redirecionarParaEscolhaDePersonagem(escolha){
+        window.location.href = `escolha_seu_personagem.html?personagem=${escolha}`
     }
 </script>
 
