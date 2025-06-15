@@ -1,8 +1,18 @@
 /*:root{
 
 }*/
+body{
+    background-color: rgb(198, 198, 253);
+}
 
-.gato{
+h1{
+    position: absolute;
+    left: 35vw;
+    top: 2vh;
+    font-size: 70px;
+}
+
+.gato {
     height: 50vh;
     width: 25vw;
     position: absolute;
@@ -13,10 +23,13 @@
     background-position: center;
 }
 
-.pokemon{
+.pokemon {
     height: 50vh;
     width: 25vw;
     position: absolute;
     left: 18vw;
     top: 25vh;
+    background-image: var(--pokemon-imagem);
+    background-size: cover;
+    background-position: center;
 }
