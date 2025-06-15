@@ -1,0 +1,22 @@
+/*:root{
+
+}*/
+
+.gato{
+    height: 50vh;
+    width: 25vw;
+    position: absolute;
+    right: 18vw;
+    top: 25vh;
+    background-image: var(--gato-imagem);
+    background-size: cover;
+    background-position: center;
+}
+
+.pokemon{
+    height: 50vh;
+    width: 25vw;
+    position: absolute;
+    left: 18vw;
+    top: 25vh;
+}

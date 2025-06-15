@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon vs Cats</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="div_pokemon" class="pokemon"></div>
+    <div id="div_gato" class="gato"></div>
+</body>
+<script>
+    window.onload = function () {
+        buscarGatos()
+    }
+    /*lista de gatos: 
+    Siamês: BB18hZT2z
+    Gato-Leão: PoZIVJ124
+    Gatânico: aqi
+    Super-Gato-Bros: bqu
+    Mini-Cat: a2q*/
+
+    /*Lista de Pokémon:
+    Pikachu, Greninja, Charizard, Gyarados, Rayquaza*/
+
+    async function buscarGatos(){
+        let gatoPromise = await fetch("https://api.thecatapi.com/v1/images/BB18hZT2z")
+        let gatoJSON = await gatoPromise.json()
+        let gatoImagem = gatoJSON.url
+
+        let div = document.getElementById('div_gato')
+        div.style.setProperty('--gato-imagem', `url(${gatoImagem})`)
+    }
+</script>
+</html>
