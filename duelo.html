@@ -5,15 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon vs Cats</title>
-    <link rel="stylesheet" href="./css/escolha_personagem.css">
+    <link rel="stylesheet" href="./css/duelo.css">
 </head>
 
 <body>
-    <h1>Escolha seu personagem!</h1>
-    <div id="div_personagem" class="personagens"></div>
+    <div id="div_jogador" class="jogador"></div>
+    <div id="div_oponente" class="oponente"></div>
+    <div class="duelo"></div>
 </body>
 <script>
-    window.onload = function () {
+    /*window.onload = function () {
         const urlParams = new URLSearchParams(window.location.search)
         const personagem = urlParams.get('personagem')
 
@@ -23,9 +24,7 @@
         else {
             listarPokemon()
         }
-    }
-    const urlParams = new URLSearchParams(window.location.search)
-    const personagem = urlParams.get('personagem')
+    }*/
     /*lista de gatos: 
     Siamês: BB18hZT2z
     Gato-Leão: PoZIVJ124
@@ -49,29 +48,20 @@
         let superGatoBrosJSON = await superGatoBrosPromise.json()
         let miniCatJSON = await miniCatPromise.json()
 
-        let gatos = [{
-            gato: gatoSiamesJSON,
-            nome: 'Gato-Siamês'
-        }, {
-            gato: gatoLeaoJSON,
-            nome: 'Gato-Leão'
-        }, {
-            gato: gatanicoJSON,
-            nome: 'Gatânico'
-        }, {
-            gato: superGatoBrosJSON,
-            nome: 'Super-Gato-Bros'
-        }, {
-            gato: miniCatJSON,
-            nome: 'Mini-Cat'
-        }]
+        let gatoSiamesImagem = gatoSiamesJSON.url
+        let gatoLeaoImagem = gatoLeaoJSON.url
+        let gatanicoImagem = gatanicoJSON.url
+        let superGatoBrosImagem = superGatoBrosJSON.url
+        let miniCatImagem = miniCatJSON.url
+
+        let gatos = [gatoSiamesImagem, gatoLeaoImagem, gatanicoImagem, superGatoBrosImagem, miniCatImagem]
 
         let div = document.getElementById('div_personagem')
         //div.style.setProperty('--gato-imagem', `url(${gatoImagem})`)
 
         let frase = ''
         for (let i = 0; i < gatos.length; i++) {
-            frase += `<div class="personagem" style="background-image: url(${gatos[i].gato.url});" onclick="redirecionarParaDuelo('${gatos[i].nome}')"></div>`
+            frase += `<div class="personagem" style="background-image: url(${gatos[i]});"></div>`
         }
         div.innerHTML = frase
     }
@@ -88,19 +78,22 @@
         let gyaradosJSON = await gyaradosPromise.json()
         let rayquazaJSON = await rayquazaPromise.json()
 
-        let pokemon = [pikachuJSON, greninjaJSON, charizardJSON, gyaradosJSON, rayquazaJSON]
+        let pikachuImagem = pikachuJSON.sprites.front_default
+        let greninjaImagem = greninjaJSON.sprites.front_default
+        let charizardImagem = charizardJSON.sprites.front_default
+        let gyaradosImagem = gyaradosJSON.sprites.front_default
+        let rayquazaImagem = rayquazaJSON.sprites.front_default
+
+        let pokemon = [pikachuImagem, greninjaImagem, charizardImagem, gyaradosImagem, rayquazaImagem]
 
         let div = document.getElementById('div_personagem')
         //div.style.setProperty('--gato-imagem', `url(${gatoImagem})`)
 
         let frase = ''
         for (let i = 0; i < pokemon.length; i++) {
-            frase += `<div class="personagem" style="background-image: url(${pokemon[i].sprites.front_default});" onclick="redirecionarParaDuelo('${pokemon[i].name}')"></div>`
+            frase += `<div class="personagem" style="background-image: url(${pokemon[i]});"></div>`
         }
         div.innerHTML = frase
-    }
-    function redirecionarParaDuelo(escolha) {
-        window.location.href = `duelo.html?personagem=${escolha}&time=${personagem}`
     }
 </script>
 
