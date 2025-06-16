@@ -12,22 +12,22 @@
     <div id="div_duelo" class="duelo">
         <div id="div_jogador" class="jogador"></div>
         <div id="div_oponente" class="oponente"></div>
-        <span class="nome_oponente">oponente</span>
-        <span class="nivel_oponente">100</span>
-        <span class="vida_oponente">100</span>
-        <span class="nome_jogador">jogador</span>
-        <span class="nivel_jogador">100</span>
-        <span class="vida_jogador">100</span>
-        <div id="div_move01" class="move01">arranhar</div>
-        <div id="div_move02" class="move02">soltar bola de pelo</div>
-        <div id="div_move03" class="move03">lamber o pelo</div>
-        <div id="div_move04" class="move04">miar</div>
+        <span id="span_nome_oponente" class="nome_oponente"></span>
+        <span id="span_nivel_oponente" class="nivel_oponente"></span>
+        <span id="span_vida_oponente" class="vida_oponente"></span>
+        <span id="span_nome_jogador" class="nome_jogador"></span>
+        <span id="span_nivel_jogador" class="nivel_jogador"></span>
+        <span id="span_vida_jogador" class="vida_jogador"></span>
+        <div id="div_move01" class="move01"></div>
+        <div id="div_move02" class="move02"></div>
+        <div id="div_move03" class="move03"></div>
+        <div id="div_move04" class="move04"></div>
     </div>
 </body>
 <script>
     window.onload = function () {
         const urlParams = new URLSearchParams(window.location.search)
-        const personagem = urlParams.get('personagem')
+        const personagem = urlParams.get('idPersonagem')
         const time = urlParams.get('time')
 
         if (time == 'gato') {
@@ -39,12 +39,13 @@
             pegarGatoOponente()
         }
     }
-    /*const urlParams = new URLSearchParams(window.location.search)
-    const personagem = urlParams.get('personagem')
-    const time = urlParams.get('time')*/
+    const urlParams = new URLSearchParams(window.location.search)
+    const personagem = urlParams.get('idPersonagem')
+    const time = urlParams.get('time')
+    const nome = urlParams.get('nome')
 
-    async function pegarGatoJogador(personagem) {
-        let gatoJogadorPromise = await fetch(`https://api.thecatapi.com/v1/images/${personagem}`)
+    async function pegarGatoJogador(jogador) {
+        let gatoJogadorPromise = await fetch(`https://api.thecatapi.com/v1/images/${jogador}`)
 
         let gatoJogadorJSON = await gatoJogadorPromise.json()
 
@@ -53,10 +54,32 @@
 
         div.style.setProperty('--jogador-imagem', `url(${gatoJogadorJSON.url})`)
 
+        span_nome_jogador.innerHTML = nome
+        span_vida_jogador.innerHTML = 100
+        span_nivel_jogador.innerHTML = 100
+
+        div_move01.innerHTML = 'arranhar'
+        div_move02.innerHTML = 'soltar bola de pelo'
+        div_move03.innerHTML = 'lamber a pelagem'
+        div_move04.innerHTML = 'miar'
+
+        div_move01.onclick = function () {
+            atacar('dano')
+        }
+        div_move02.onclick = function () {
+            atacar('debuff')
+        }
+        div_move03.onclick = function () {
+            atacar('cura')
+        }
+        div_move04.onclick = function () {
+            atacar('buff')
+        }
+
 
     }
-    async function pegarPokemonJogador(personagem) {
-        let pokemonJogadorPromise = await fetch(`https://pokeapi.co/api/v2/pokemon/${personagem}`)
+    async function pegarPokemonJogador(jogador) {
+        let pokemonJogadorPromise = await fetch(`https://pokeapi.co/api/v2/pokemon/${jogador}`)
 
         let pokemonJogadorJSON = await pokemonJogadorPromise.json()
 
@@ -64,6 +87,108 @@
         //div.style.setProperty('--pokemon-imagem', `url(${pokemonImagem})`)
 
         div.style.setProperty('--jogador-imagem', `url(${pokemonJogadorJSON.sprites.front_default})`)
+
+        span_nome_jogador.innerHTML = nome
+        span_vida_jogador.innerHTML = 100
+        span_nivel_jogador.innerHTML = 100
+
+        if (nome == 'pikachu') {
+            div_move01.innerHTML = 'thunder-shock'
+            div_move02.innerHTML = 'strength'
+            div_move03.innerHTML = 'headbutt'
+            div_move04.innerHTML = 'shock'
+            
+            div_move01.onclick = function () {
+                atacar('dano')
+            }
+            div_move02.onclick = function () {
+                atacar('buff')
+            }
+            div_move03.onclick = function () {
+                atacar('dano')
+            }
+            div_move04.onclick = function () {
+                atacar('dano')
+            }
+        }
+        else if (nome == 'greninja') {
+            div_move01.innerHTML = 'low-kick'
+            div_move02.innerHTML = 'pound'
+            div_move03.innerHTML = 'growl'
+            div_move04.innerHTML = 'cut'
+            
+            div_move01.onclick = function () {
+                atacar('dano')
+            }
+            div_move02.onclick = function () {
+                atacar('dano')
+            }
+            div_move03.onclick = function () {
+                atacar('debuff')
+            }
+            div_move04.onclick = function () {
+                atacar('dano')
+            }
+        }
+        else if (nome == 'charizard') {
+            div_move01.innerHTML = 'flamethrower'
+            div_move02.innerHTML = 'fire-punch'
+            div_move03.innerHTML = 'scratch'
+            div_move04.innerHTML = 'growl'
+            
+            div_move01.onclick = function () {
+                atacar('dano')
+            }
+            div_move02.onclick = function () {
+                atacar('dano')
+            }
+            div_move03.onclick = function () {
+                atacar('dano')
+            }
+            div_move04.onclick = function () {
+                atacar('debuff')
+            }
+        }
+        else if (nome == 'gyarados') {
+            div_move01.innerHTML = 'tackle'
+            div_move02.innerHTML = 'hydro-pump'
+            div_move03.innerHTML = 'hyper-beam'
+            div_move04.innerHTML = 'roar'
+            
+            div_move01.onclick = function () {
+                atacar('dano')
+            }
+            div_move02.onclick = function () {
+                atacar('dano')
+            }
+            div_move03.onclick = function () {
+                atacar('dano')
+            }
+            div_move04.onclick = function () {
+                atacar('debuff')
+            }
+        }
+        else if (nome == 'rayquaza') {
+            div_move01.innerHTML = 'swords-dance'
+            div_move02.innerHTML = 'ice-beam'
+            div_move03.innerHTML = 'hyper-beam'
+            div_move04.innerHTML = 'blizzard'
+            
+            div_move01.onclick = function () {
+                atacar('buff')
+            }
+            div_move02.onclick = function () {
+                atacar('dano')
+            }
+            div_move03.onclick = function () {
+                atacar('dano')
+            }
+            div_move04.onclick = function () {
+                atacar('dano')
+            }
+        }
+
+
     }
 
     async function pegarGatoOponente() {
@@ -81,6 +206,10 @@
 
         div.style.setProperty('--oponente-imagem', `url(${gatoOponenteJSON.url})`)
 
+        span_nome_oponente.innerHTML = gatos[numeroSorteado]
+        span_vida_oponente.innerHTML = 100
+        span_nivel_oponente.innerHTML = 100
+
     }
 
     async function pegarPokemonOponente() {
@@ -97,6 +226,10 @@
         //div.style.setProperty('--pokemon-imagem', `url(${pokemonImagem})`)
 
         div.style.setProperty('--oponente-imagem', `url(${pokemonOponenteJSON.sprites.front_default})`)
+
+        span_nome_oponente.innerHTML = pokemon[numeroSorteado]
+        span_vida_oponente.innerHTML = 100
+        span_nivel_oponente.innerHTML = 100
     }
 </script>
 

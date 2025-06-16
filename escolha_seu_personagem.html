@@ -71,7 +71,7 @@
 
         let frase = ''
         for (let i = 0; i < gatos.length; i++) {
-            frase += `<div class="personagem" style="background-image: url(${gatos[i].gato.url});" onclick="redirecionarParaDuelo('${gatos[i].gato.id}')"></div>`
+            frase += `<div class="personagem" style="background-image: url(${gatos[i].gato.url});" onclick="redirecionarParaDuelo('${gatos[i].gato.id}', '${gatos[i].nome}')"></div>`
         }
         div.innerHTML = frase
     }
@@ -95,12 +95,13 @@
 
         let frase = ''
         for (let i = 0; i < pokemon.length; i++) {
-            frase += `<div class="personagem" style="background-image: url(${pokemon[i].sprites.front_default});" onclick="redirecionarParaDuelo('${pokemon[i].name}')"></div>`
+            frase += `<div class="personagem" style="background-image: url(${pokemon[i].sprites.front_default});"
+             onclick="redirecionarParaDuelo('${pokemon[i].name}, ${pokemon[i].name}')"></div>`
         }
         div.innerHTML = frase
     }
-    function redirecionarParaDuelo(escolha) {
-        window.location.href = `duelo.html?personagem=${escolha}&time=${personagem}`
+    function redirecionarParaDuelo(escolha, nome) {
+        window.location.href = `duelo.html?idPersonagem=${escolha}&time=${personagem}&nome=${nome}`
     }
 </script>
 
