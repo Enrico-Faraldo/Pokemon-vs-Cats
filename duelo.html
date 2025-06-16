@@ -9,9 +9,20 @@
 </head>
 
 <body>
-    <div id="div_jogador" class="jogador"></div>
-    <div id="div_oponente" class="oponente"></div>
-    <div class="duelo"></div>
+    <div id="div_duelo" class="duelo">
+        <div id="div_jogador" class="jogador"></div>
+        <div id="div_oponente" class="oponente"></div>
+        <span class="nome_oponente">oponente</span>
+        <span class="nivel_oponente">100</span>
+        <span class="vida_oponente">100</span>
+        <span class="nome_jogador">jogador</span>
+        <span class="nivel_jogador">100</span>
+        <span class="vida_jogador">100</span>
+        <div id="div_move01" class="move01">arranhar</div>
+        <div id="div_move02" class="move02">soltar bola de pelo</div>
+        <div id="div_move03" class="move03">lamber o pelo</div>
+        <div id="div_move04" class="move04">miar</div>
+    </div>
 </body>
 <script>
     window.onload = function () {
@@ -57,7 +68,7 @@
 
     async function pegarGatoOponente() {
         const numeroSorteado = Math.floor(Math.random() * 5)
-        
+
         let gatos = ['BB18hZT2z', 'PoZIVJ124', 'aqi', 'bqu', 'a2q']
         let gatoOponenteNome = gatos[numeroSorteado]
 
@@ -74,7 +85,7 @@
 
     async function pegarPokemonOponente() {
         const numeroSorteado = Math.floor(Math.random() * 5)
-        
+
         let pokemon = ['pikachu', 'greninja', 'charizard', 'gyarados', 'rayquaza']
         let pokemonOponenteNome = pokemon[numeroSorteado]
 
