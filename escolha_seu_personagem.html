@@ -96,7 +96,7 @@
         let frase = ''
         for (let i = 0; i < pokemon.length; i++) {
             frase += `<div class="personagem" style="background-image: url(${pokemon[i].sprites.front_default});"
-             onclick="redirecionarParaDuelo('${pokemon[i].name}, ${pokemon[i].name}')"></div>`
+             onclick="redirecionarParaDuelo('${pokemon[i].name}', '${pokemon[i].name}')"></div>`
         }
         div.innerHTML = frase
     }

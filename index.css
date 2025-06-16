@@ -1,0 +1,388 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    
+}
+
+.corpo1 {
+    width: 100%;
+    height: 100vh;
+    animation: aparecerSumir 0.5s ease-in-out 1;
+    background-repeat: no-repeat;
+    background-image: url(./img/fundo4.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    animation: porSol 15s linear infinite alternate;
+}
+
+
+
+@keyframes aparecerSumir {
+
+    0%{
+
+        opacity: 0;
+
+    }
+
+    100%{
+
+        opacity: 1;
+
+    }
+
+}
+
+@keyframes porSol {
+
+    0%{
+
+        width: 100%;
+        height: 100vh;
+        animation: aparecerSumir 0.5s ease-in-out 1;
+        background-repeat: no-repeat;
+        background-image: url(./img/fundo4.png);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        overflow-y: hidden;
+        overflow-x: hidden;
+
+    }
+
+     25%{
+
+        width: 100%;
+        height: 100vh;
+        animation: aparecerSumir 0.5s ease-in-out 1;
+        background-repeat: no-repeat;
+        background-image: url(./img/fundo4.png);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        overflow-y: hidden;
+        overflow-x: hidden;
+
+    }
+
+    50%{
+
+        width: 100%;
+        height: 100vh;
+        animation: aparecerSumir 0.5s ease-in-out 1;
+        background-repeat: no-repeat;
+        background-image: url(./img/fundo4.png);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        overflow-y: hidden;
+        overflow-x: hidden;
+
+    }
+
+    75%{
+
+        width: 100%;
+        height: 100vh;
+        animation: aparecerSumir 0.5s ease-in-out 1;
+        background-repeat: no-repeat;
+        background-image: url(./img/fundo5.png);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        overflow-y: hidden;
+        overflow-x: hidden;
+
+    }
+
+    100%{
+
+        width: 100%;
+        height: 100vh;
+        animation: aparecerSumir 0.5s ease-in-out 1;
+        background-repeat: no-repeat;
+        background-image: url(./img/fundo5.png);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        overflow-y: hidden;
+        overflow-x: hidden;
+
+    }
+
+}
+
+
+.treinador{
+    margin-top: 54vh;
+    animation: andar 7s linear infinite;
+    position: relative;
+    z-index: 1000;
+
+}
+
+.pikachu{
+    height: 10vh;
+    width: auto;
+    display: flex;
+    margin-top: -33vh;
+    animation: andar 7s linear infinite;
+    position: relative;
+    z-index: 7;
+
+}
+
+.poke-battle{
+    height: 7vh;
+    width: auto;
+    display: flex;
+    margin-top: -10vh;
+    position: relative;
+    z-index: 6;
+
+}
+
+.charizard{
+    height: 25vh;
+    width: auto;
+    display: flex;
+    margin-top: -23.5vh;
+    margin-left: 3vw;
+    position: relative;
+    z-index: 5;
+
+}
+
+.hoho{
+    height: 6vh;
+    width: auto;
+    display: flex;
+    animation: voar 30s linear infinite;
+    z-index: 4;
+}
+
+.abra{
+    height: 11.5vh;
+    width: auto;
+    animation: girar 10s linear infinite;
+    display: flex;
+    position: relative;
+    z-index: 3;
+
+}
+
+.pokeflying{
+    height: 8vh;
+    width: auto;
+    animation: anti-voar 20s linear infinite;
+    position: relative;
+    z-index: 2;
+
+}
+
+.logo{
+    height: 16vh;
+    width: auto;
+    display: flex;
+    margin-left: 38vw;
+    margin-top: -45vh;
+    position: relative;
+    filter: opacity(60%);
+    z-index: 1;
+}
+
+.pokeball{
+    height: 10vh;
+    width: auto;
+    display: flex;
+    margin-left: 47vw;
+    filter: opacity(60%);
+    transition: 0.5s;
+
+}
+
+.pokeball:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+    
+
+}
+
+
+
+
+@keyframes andar {
+
+    0%{
+
+
+        margin-left: -20vw;
+        opacity: 1;
+
+    }
+
+    25%{
+
+        margin-left: 10vw;
+        opacity: 1;
+
+    }
+
+    50%{
+
+        margin-left: 40vw;
+        opacity: 1;
+
+    }
+
+    75%{
+
+        margin-left: 70vw;
+        opacity: 1;
+
+    }
+
+    100%{
+
+        margin-left: 100vw;
+        opacity: 1;
+
+    }
+
+}
+
+@keyframes voar {
+
+    0%{
+
+        margin-top: -65vh;
+        margin-left: -20vw;
+        opacity: 1;
+
+    }
+
+    25%{
+
+        margin-top: -65vh;
+        margin-left: 10vw;
+        opacity: 1;
+
+    }
+
+    50%{
+
+        margin-top: -65vh;
+        margin-left: 40vw;
+        opacity: 1;
+
+    }
+
+    75%{
+
+        margin-top: -65vh;
+        margin-left: 70vw;
+        opacity: 1;
+
+    }
+
+    100%{
+
+        margin-top: -65vh;
+        margin-left: 100vw;
+        opacity: 1;
+
+    }
+
+}
+
+@keyframes anti-voar {
+
+    100%{
+
+        margin-top: -75vh;
+        margin-left: -20vw;
+        opacity: 1;
+
+    }
+
+    75%{
+
+        margin-top: -75vh;
+        margin-left: 10vw;
+        opacity: 1;
+
+    }
+
+    50%{
+
+        margin-top: -75vh;
+        margin-left: 40vw;
+        opacity: 1;
+
+    }
+
+    25%{
+
+        margin-top: -75vh;
+        margin-left: 70vw;
+        opacity: 1;
+
+    }
+
+    0%{
+
+        margin-top: -75vh;
+        margin-left: 100vw;
+        opacity: 1;
+
+    }
+
+}
+
+
+@keyframes girar {
+
+        0%{
+
+        margin-left: -20vw;
+
+    }
+
+    25%{
+
+        margin-left: 10vw;
+
+    }
+
+    50%{
+
+        margin-left: 40vw;
+
+    }
+
+    75%{
+
+        margin-left: 70vw;
+
+    }
+
+    100%{
+
+        margin-left: 100vw;
+
+    }
+
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+

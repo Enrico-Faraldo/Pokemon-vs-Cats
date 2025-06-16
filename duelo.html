@@ -78,16 +78,16 @@
         div_move04.innerHTML = 'miar'
 
         div_move01.onclick = function () {
-            atacar('dano', nome)
+            atacar('dano', nome, 'arranhar')
         }
         div_move02.onclick = function () {
-            atacar('debuff', nome)
+            atacar('debuff', nome, 'soltar bola de pelo')
         }
         div_move03.onclick = function () {
-            atacar('cura', nome)
+            atacar('cura', nome, 'lamber a pelagem')
         }
         div_move04.onclick = function () {
-            atacar('buff', nome)
+            atacar('buff', nome, 'miar')
         }
 
 
@@ -113,16 +113,16 @@
             div_move04.innerHTML = 'shock'
 
             div_move01.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'thunder-shock')
             }
             div_move02.onclick = function () {
-                atacar('buff', nome)
+                atacar('buff', nome, 'strength')
             }
             div_move03.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'headbutt')
             }
             div_move04.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'shock')
             }
         }
         else if (nome == 'greninja') {
@@ -132,16 +132,16 @@
             div_move04.innerHTML = 'cut'
 
             div_move01.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'low-kick')
             }
             div_move02.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'pound')
             }
             div_move03.onclick = function () {
-                atacar('debuff', nome)
+                atacar('debuff', nome, 'growl')
             }
             div_move04.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'cut')
             }
         }
         else if (nome == 'charizard') {
@@ -151,16 +151,16 @@
             div_move04.innerHTML = 'growl'
 
             div_move01.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'flamethrower')
             }
             div_move02.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'fire-punch')
             }
             div_move03.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'scratch')
             }
             div_move04.onclick = function () {
-                atacar('debuff', nome)
+                atacar('debuff', nome, 'growl')
             }
         }
         else if (nome == 'gyarados') {
@@ -170,16 +170,16 @@
             div_move04.innerHTML = 'roar'
 
             div_move01.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'tackle')
             }
             div_move02.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'hydro-pump')
             }
             div_move03.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'hyper-beam')
             }
             div_move04.onclick = function () {
-                atacar('debuff', nome)
+                atacar('debuff', nome, 'roar')
             }
         }
         else if (nome == 'rayquaza') {
@@ -189,16 +189,16 @@
             div_move04.innerHTML = 'blizzard'
 
             div_move01.onclick = function () {
-                atacar('buff', nome)
+                atacar('buff', nome, 'swords-dance')
             }
             div_move02.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'ice-beam')
             }
             div_move03.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'hyper-beam')
             }
             div_move04.onclick = function () {
-                atacar('dano', nome)
+                atacar('dano', nome, 'blizzard')
             }
         }
 
@@ -218,7 +218,7 @@
 
         div.style.setProperty('--oponente-imagem', `url(${gatoOponenteJSON.url})`)
 
-        span_nome_oponente.innerHTML = gatos[numeroSorteado]
+        span_nome_oponente.innerHTML = gatosNomes[numeroSorteado]
         span_vida_oponente.innerHTML = vidaOponente
         span_nivel_oponente.innerHTML = 100
 
@@ -241,7 +241,7 @@
         span_nivel_oponente.innerHTML = 100
     }
 
-    function atacar(tipoAtaque, nome) {
+    function atacar(tipoAtaque, nome, ataqueNome) {
         let multiplicadorDeDanoPorPersonagem = 1
 
         if (nome == 'Super-Gato-Bros' || nome == 'charizard' || nome == 'Gatânico' || nome == 'gyarados') {
@@ -269,8 +269,15 @@
         }
 
         span_vida_oponente.innerHTML = vidaOponente
+        span_vida_jogador.innerHTML = vidaJogador
 
-        exibirMensagemDeAtaqueAliado(nome, tipoAtaque)
+        if (vidaOponente <= 0) {
+            setTimeout(() => encerrarJogo(), 2000)
+        }
+
+        else {
+            exibirMensagemDeAtaqueAliado(nome, ataqueNome)
+        }
     }
 
     function exibirMensagemDeAtaqueAliado(nome, ataqueNome) {
@@ -295,7 +302,7 @@
         let ataques = []
         let ataqueAleatorio = Math.floor(Math.random() * 4)
 
-        
+
         if (nome == 'pikachu') {
             ataques = [
                 { nome: 'thunder-shock', tipo: 'dano' },
@@ -355,40 +362,64 @@
         if (nome == 'Super-Gato-Bros' || nome == 'charizard' || nome == 'Gatânico' || nome == 'gyarados') {
             multiplicadorDeDanoPorPersonagem = 1.2
         }
-        
+
         else if (nome == 'Gato-Leão' || nome == 'rayquaza') {
             multiplicadorDeDanoPorPersonagem = 1.5
         }
-        
+
         if (tipoAtaque == 'dano') {
             vidaJogador -= 10 * multiplicadorDeDanoPorPersonagem * buffOponente * debuffOponente
         }
-        
+
         else if (tipoAtaque == 'buff') {
             buffOponente *= 1.2
         }
-        
+
         else if (tipoAtaque == 'debuff') {
             debuff *= 0.95
         }
-        
+
         else if (tipoAtaque == 'cura') {
             vidaOponente += 20
         }
 
         span_vida_jogador.innerHTML = vidaJogador
+        span_vida_oponente.innerHTML = vidaOponente
 
         div_mensagem.innerHTML = `${nome} usou ${ataques[ataqueAleatorio].nome}!`
 
-        setTimeout(() => reestabelecerAtaques(), 2000)
+        if (vidaJogador <= 0) {
+            setTimeout(() => encerrarJogo(), 2000)
+        }
+        else {
+            setTimeout(() => reestabelecerAtaques(), 2000)
+        }
     }
 
-    function reestabelecerAtaques(){
+    function reestabelecerAtaques() {
         div_move01.style.display = 'flex'
         div_move02.style.display = 'flex'
         div_move03.style.display = 'flex'
         div_move04.style.display = 'flex'
         div_mensagem.style.display = 'none'
+    }
+
+    function encerrarJogo() {
+        div_move01.style.display = 'none'
+        div_move02.style.display = 'none'
+        div_move03.style.display = 'none'
+        div_move04.style.display = 'none'
+        div_mensagem.style.display = 'flex'
+
+        if (vidaJogador <= 0) {
+            div_mensagem.innerHTML = 'Você perdeu! Tentar de novo?'
+        }
+        else if (vidaOponente <= 0) {
+            div_mensagem.innerHTML = 'Você venceu! Tentar de novo?'
+        }
+        div_mensagem.onclick = function () {
+            window.location.href = 'index.html'
+        }
     }
 </script>
 
