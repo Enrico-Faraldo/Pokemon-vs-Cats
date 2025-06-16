@@ -143,3 +143,13 @@
     font-size: 70px;
     text-align: center;
 }
+
+.mensagem{
+    height: 5vh;
+    width: 50vw;
+    position: absolute;
+    right: 40vw;
+    bottom: -30vh;
+    font-size: 70px;
+    text-align: center;
+}

@@ -18,10 +18,13 @@
         <span id="span_nome_jogador" class="nome_jogador"></span>
         <span id="span_nivel_jogador" class="nivel_jogador"></span>
         <span id="span_vida_jogador" class="vida_jogador"></span>
-        <div id="div_move01" class="move01"></div>
-        <div id="div_move02" class="move02"></div>
-        <div id="div_move03" class="move03"></div>
-        <div id="div_move04" class="move04"></div>
+        <div id="opcoes">
+            <div id="div_move01" class="move01"></div>
+            <div id="div_move02" class="move02"></div>
+            <div id="div_move03" class="move03"></div>
+            <div id="div_move04" class="move04"></div>
+            <div id="div_mensagem" class="mensagem" style="display: none;"></div>
+        </div>
     </div>
 </body>
 <script>
@@ -44,6 +47,17 @@
     const time = urlParams.get('time')
     const nome = urlParams.get('nome')
 
+    let buff = 1
+    let debuff = 1
+    let buffOponente = 1
+    let debuffOponente = 1
+    let vidaJogador = 100
+    let vidaOponente = 100
+
+    const numeroSorteado = Math.floor(Math.random() * 5)
+    const pokemon = ['pikachu', 'greninja', 'charizard', 'gyarados', 'rayquaza']
+    const gatosNomes = ['Gato-Siamês', 'Gato-Leão', 'Gatânico', 'Super-Gato-Bros', 'Mini-Cat']
+
     async function pegarGatoJogador(jogador) {
         let gatoJogadorPromise = await fetch(`https://api.thecatapi.com/v1/images/${jogador}`)
 
@@ -55,7 +69,7 @@
         div.style.setProperty('--jogador-imagem', `url(${gatoJogadorJSON.url})`)
 
         span_nome_jogador.innerHTML = nome
-        span_vida_jogador.innerHTML = 100
+        span_vida_jogador.innerHTML = vidaJogador
         span_nivel_jogador.innerHTML = 100
 
         div_move01.innerHTML = 'arranhar'
@@ -64,16 +78,16 @@
         div_move04.innerHTML = 'miar'
 
         div_move01.onclick = function () {
-            atacar('dano')
+            atacar('dano', nome)
         }
         div_move02.onclick = function () {
-            atacar('debuff')
+            atacar('debuff', nome)
         }
         div_move03.onclick = function () {
-            atacar('cura')
+            atacar('cura', nome)
         }
         div_move04.onclick = function () {
-            atacar('buff')
+            atacar('buff', nome)
         }
 
 
@@ -89,7 +103,7 @@
         div.style.setProperty('--jogador-imagem', `url(${pokemonJogadorJSON.sprites.front_default})`)
 
         span_nome_jogador.innerHTML = nome
-        span_vida_jogador.innerHTML = 100
+        span_vida_jogador.innerHTML = vidaJogador
         span_nivel_jogador.innerHTML = 100
 
         if (nome == 'pikachu') {
@@ -97,18 +111,18 @@
             div_move02.innerHTML = 'strength'
             div_move03.innerHTML = 'headbutt'
             div_move04.innerHTML = 'shock'
-            
+
             div_move01.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move02.onclick = function () {
-                atacar('buff')
+                atacar('buff', nome)
             }
             div_move03.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move04.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
         }
         else if (nome == 'greninja') {
@@ -116,18 +130,18 @@
             div_move02.innerHTML = 'pound'
             div_move03.innerHTML = 'growl'
             div_move04.innerHTML = 'cut'
-            
+
             div_move01.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move02.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move03.onclick = function () {
-                atacar('debuff')
+                atacar('debuff', nome)
             }
             div_move04.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
         }
         else if (nome == 'charizard') {
@@ -135,18 +149,18 @@
             div_move02.innerHTML = 'fire-punch'
             div_move03.innerHTML = 'scratch'
             div_move04.innerHTML = 'growl'
-            
+
             div_move01.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move02.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move03.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move04.onclick = function () {
-                atacar('debuff')
+                atacar('debuff', nome)
             }
         }
         else if (nome == 'gyarados') {
@@ -154,18 +168,18 @@
             div_move02.innerHTML = 'hydro-pump'
             div_move03.innerHTML = 'hyper-beam'
             div_move04.innerHTML = 'roar'
-            
+
             div_move01.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move02.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move03.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move04.onclick = function () {
-                atacar('debuff')
+                atacar('debuff', nome)
             }
         }
         else if (nome == 'rayquaza') {
@@ -173,18 +187,18 @@
             div_move02.innerHTML = 'ice-beam'
             div_move03.innerHTML = 'hyper-beam'
             div_move04.innerHTML = 'blizzard'
-            
+
             div_move01.onclick = function () {
-                atacar('buff')
+                atacar('buff', nome)
             }
             div_move02.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move03.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
             div_move04.onclick = function () {
-                atacar('dano')
+                atacar('dano', nome)
             }
         }
 
@@ -192,8 +206,6 @@
     }
 
     async function pegarGatoOponente() {
-        const numeroSorteado = Math.floor(Math.random() * 5)
-
         let gatos = ['BB18hZT2z', 'PoZIVJ124', 'aqi', 'bqu', 'a2q']
         let gatoOponenteNome = gatos[numeroSorteado]
 
@@ -207,15 +219,12 @@
         div.style.setProperty('--oponente-imagem', `url(${gatoOponenteJSON.url})`)
 
         span_nome_oponente.innerHTML = gatos[numeroSorteado]
-        span_vida_oponente.innerHTML = 100
+        span_vida_oponente.innerHTML = vidaOponente
         span_nivel_oponente.innerHTML = 100
 
     }
 
     async function pegarPokemonOponente() {
-        const numeroSorteado = Math.floor(Math.random() * 5)
-
-        let pokemon = ['pikachu', 'greninja', 'charizard', 'gyarados', 'rayquaza']
         let pokemonOponenteNome = pokemon[numeroSorteado]
 
         let pokemonOponentePromise = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonOponenteNome}`)
@@ -228,8 +237,158 @@
         div.style.setProperty('--oponente-imagem', `url(${pokemonOponenteJSON.sprites.front_default})`)
 
         span_nome_oponente.innerHTML = pokemon[numeroSorteado]
-        span_vida_oponente.innerHTML = 100
+        span_vida_oponente.innerHTML = vidaOponente
         span_nivel_oponente.innerHTML = 100
+    }
+
+    function atacar(tipoAtaque, nome) {
+        let multiplicadorDeDanoPorPersonagem = 1
+
+        if (nome == 'Super-Gato-Bros' || nome == 'charizard' || nome == 'Gatânico' || nome == 'gyarados') {
+            multiplicadorDeDanoPorPersonagem = 1.2
+        }
+
+        else if (nome == 'Gato-Leão' || nome == 'rayquaza') {
+            multiplicadorDeDanoPorPersonagem = 1.5
+        }
+
+        if (tipoAtaque == 'dano') {
+            vidaOponente -= 10 * multiplicadorDeDanoPorPersonagem * buff * debuff
+        }
+
+        else if (tipoAtaque == 'buff') {
+            buff *= 1.2
+        }
+
+        else if (tipoAtaque == 'debuff') {
+            debuffOponente *= 0.95
+        }
+
+        else if (tipoAtaque == 'cura') {
+            vidaJogador += 20
+        }
+
+        span_vida_oponente.innerHTML = vidaOponente
+
+        exibirMensagemDeAtaqueAliado(nome, tipoAtaque)
+    }
+
+    function exibirMensagemDeAtaqueAliado(nome, ataqueNome) {
+        div_move01.style.display = 'none'
+        div_move02.style.display = 'none'
+        div_move03.style.display = 'none'
+        div_move04.style.display = 'none'
+        div_mensagem.style.display = 'flex'
+
+        div_mensagem.innerHTML = `${nome} usou ${ataqueNome}!`
+
+        if (time == 'gato') {
+            setTimeout(() => ataqueDoOponente(pokemon[numeroSorteado]), 2000)
+        }
+        else {
+            setTimeout(() => ataqueDoOponente(gatosNomes[numeroSorteado]), 2000)
+        }
+    }
+
+    function ataqueDoOponente(nome) {
+        let multiplicadorDeDanoPorPersonagem = 1
+        let ataques = []
+        let ataqueAleatorio = Math.floor(Math.random() * 4)
+
+        
+        if (nome == 'pikachu') {
+            ataques = [
+                { nome: 'thunder-shock', tipo: 'dano' },
+                { nome: 'strength', tipo: 'buff' },
+                { nome: 'headbutt', tipo: 'dano' },
+                { nome: 'shock', tipo: 'dano' }
+            ];
+        }
+
+        else if (nome == 'greninja') {
+            ataques = [
+                { nome: 'low-kick', tipo: 'dano' },
+                { nome: 'pound', tipo: 'dano' },
+                { nome: 'growl', tipo: 'buff' },
+                { nome: 'cut', tipo: 'dano' }
+            ];
+        }
+
+        else if (nome == 'charizard') {
+            ataques = [
+                { nome: 'flamethrower', tipo: 'dano' },
+                { nome: 'fire-punch', tipo: 'dano' },
+                { nome: 'scratch', tipo: 'dano' },
+                { nome: 'growl', tipo: 'buff' }
+            ];
+        }
+
+        else if (nome == 'gyarados') {
+            ataques = [
+                { nome: 'tackle', tipo: 'dano' },
+                { nome: 'hydro-pump', tipo: 'dano' },
+                { nome: 'hyper-beam', tipo: 'dano' },
+                { nome: 'roar', tipo: 'buff' }
+            ];
+        }
+
+        else if (nome == 'rayquaza') {
+            ataques = [
+                { nome: 'swords-dance', tipo: 'buff' },
+                { nome: 'ice-beam', tipo: 'dano' },
+                { nome: 'hyper-beam', tipo: 'dano' },
+                { nome: 'blizzard', tipo: 'dano' }
+            ];
+        }
+
+        else {
+            ataques = [
+                { nome: 'arranhar', tipo: 'dano' },
+                { nome: 'soltar bola de pelo', tipo: 'debuff' },
+                { nome: 'lamber a pelagem', tipo: 'cura' },
+                { nome: 'miar', tipo: 'buff' }
+            ];
+        }
+
+        let tipoAtaque = ataques[ataqueAleatorio].tipo
+
+        if (nome == 'Super-Gato-Bros' || nome == 'charizard' || nome == 'Gatânico' || nome == 'gyarados') {
+            multiplicadorDeDanoPorPersonagem = 1.2
+        }
+        
+        else if (nome == 'Gato-Leão' || nome == 'rayquaza') {
+            multiplicadorDeDanoPorPersonagem = 1.5
+        }
+        
+        if (tipoAtaque == 'dano') {
+            vidaJogador -= 10 * multiplicadorDeDanoPorPersonagem * buffOponente * debuffOponente
+        }
+        
+        else if (tipoAtaque == 'buff') {
+            buffOponente *= 1.2
+        }
+        
+        else if (tipoAtaque == 'debuff') {
+            debuff *= 0.95
+        }
+        
+        else if (tipoAtaque == 'cura') {
+            vidaOponente += 20
+        }
+
+        span_vida_jogador.innerHTML = vidaJogador
+
+        div_mensagem.innerHTML = `${nome} usou ${ataques[ataqueAleatorio].nome}!`
+
+        setTimeout(() => reestabelecerAtaques(), 2000)
+    }
+
+    function reestabelecerAtaques(){
+        div_move01.style.display = 'flex'
+        div_move02.style.display = 'flex'
+        div_move03.style.display = 'flex'
+        div_move04.style.display = 'flex'
+        div_mensagem.style.display = 'none'
     }
 </script>
 
